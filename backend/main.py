@@ -1,30 +1,6 @@
 
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+"""Uvicorn entry point; run with ``uvicorn backend.main:app --reload``."""
 
-app = FastAPI(
-    title="BrandShield Sentinel API",
-    description="Detect and investigate potential brand impersonation.",
-    version="1.0.0",
-)
+from app.main import app
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-
-@app.get("/")
-def home():
-    return {
-        "message": "BrandShield Sentinel API is running!",
-        "status": "healthy",
-    }
-
-
-@app.get("/api/health")
-def health():
-    return {"status": "ok"}
+__all__ = ["app"]
