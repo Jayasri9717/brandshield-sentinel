@@ -1,0 +1,19 @@
+{
+  "features": [
+    "account_age_days",
+    "follower_count",
+    "is_verified",
+    "logo_similarity",
+    "handle_edit_score",
+    "giveaway_post_ratio",
+    "scam_dm_reports",
+    "url_similarity",
+    "platform"
+  ],
+  "target": "label",
+  "classes": [
+    "Fake",
+    "Legit",
+    "Monitor"
+  ]
+}
