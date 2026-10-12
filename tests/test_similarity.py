@@ -107,20 +107,3 @@ def jaro_winkler_similarity(a: str, b: str, prefix_scale: float = 0.1) -> float:
     jaro = _jaro(a, b)
     prefix = 0
     for ca, cb in zip(a[:4], b[:4]):
-        if ca != cb:
-            break
-        prefix += 1
-    return min(1.0, jaro + prefix * prefix_scale * (1.0 - jaro))
-
-
-def combined_similarity(a: str, b: str) -> float:
-    """Weighted blend of Levenshtein and Jaro-Winkler similarity, 0.0-1.0.
-
-    Jaro-Winkler gets more weight because impersonators usually keep the real
-    brand as a prefix ("zomato" -> "zomato_support"), which it rewards.
-    """
-    score = (
-        LEVENSHTEIN_WEIGHT * levenshtein_similarity(a, b)
-        + JARO_WINKLER_WEIGHT * jaro_winkler_similarity(a, b)
-    )
-    return round(max(0.0, min(1.0, score)), 4)

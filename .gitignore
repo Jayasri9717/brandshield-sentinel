@@ -6,3 +6,26 @@ venv/
 brandshield.db
 *.sqlite
 *.sqlite3
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
+.ipynb_checkpoints/
+
+# Models are large — allow via LFS or push explicitly
+models/*.pkl
+models/*.joblib
+!models/.gitkeep
+
+# Local data
+raw/
+processed/
+*.log
+.DS_Store
