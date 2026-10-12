@@ -1,23 +1,41 @@
+# Python
 __pycache__/
 *.py[cod]
-*.egg-info/
 .venv/
 venv/
-.env
+*.egg-info/
 .pytest_cache/
-.coverage
-htmlcov/
-dist/
-build/
-.ipynb_checkpoints/
+.ruff_cache/
 
-# Models are large — allow via LFS or push explicitly
-models/*.pkl
-models/*.joblib
-!models/.gitkeep
+# Data
+data/raw/
+data/*.db
+data/uploads/
 
-# Local data
-raw/
-processed/
-*.log
+# Allow cleaned dataset + trained models
+!data/processed/
+!data/processed/social_v2_clean.csv
+!models/
+!models/social_model_v2.pkl
+!models/social_features_v2.json
+
+# Ignore everything else
+data/processed/*
+models/*
+
+# Node
+node_modules/
+frontend/dist/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
 .DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.local
