@@ -1,0 +1,6 @@
+data/brandshield.sqlite3
+__pycache__/
+*.py[cod]
+.pytest_cache/
+frontend/dist/
+frontend/.env.local

@@ -1,0 +1,43 @@
+export type PageId = "dashboard" | "profile" | "social" | "apps" | "domains";
+export type HealthState = "checking" | "online" | "offline";
+export type Severity = "Critical" | "High" | "Medium";
+export type ThemeMode = "light" | "dark" | "system";
+export type AuthMode = "login" | "register";
+export type AuthUser = { id: string; email: string; display_name: string };
+export type AuthResponse = { access_token: string; token_type: "bearer"; user: AuthUser };
+export type AuthFormValues = { name: string; email: string; password: string };
+export type BrandProfileData = { name: string; industry: string; region: string; description: string };
+export type OfficialDomain = { domain: string; note: string; verified: boolean };
+export type OfficialAccount = { platform: string; identifier: string; verified: boolean };
+export type LogoAsset = { name: string; dataUrl: string };
+export type ProfileExtras = { domains: OfficialDomain[]; accounts: OfficialAccount[]; appIds: string[]; logoAsset: LogoAsset | null };
+export type AppIdentity = { name: string; initials: string; role: string };
+
+export type DetectionProfilePayload = {
+  id?: string;
+  brand_name: string;
+  industry: string;
+  region: string;
+  description: string;
+  logo_base64: string | null;
+  verified_domains: string[];
+  social_accounts: string[];
+  app_ids: string[];
+};
+export type DetectionProfile = DetectionProfilePayload & { id: string };
+export type DetectionResponse<T> = { detections: T[]; total: number; high_risk_count: number };
+export type SocialCandidate = { platform: string; handle: string; display_name: string; bio: string; profile_image_url: string | null };
+export type SocialDetection = {
+  platform: string;
+  profile_handle: string;
+  display_name: string;
+  bio: string;
+  similarity_score: number;
+  risk_score: number;
+  evidence: string;
+  is_official: boolean;
+};
+export type AppCandidate = { app_name: string; publisher: string; package_id: string; source: string; description: string; icon_url: string | null };
+export type AppDetection = AppCandidate & { description_similarity: number; logo_similarity: number; risk_score: number; evidence: string; is_official: boolean };
+export type DomainDetection = { domain: string; variation_type: string; dns_resolves: boolean; http_status: number | null; brand_on_page: string | null; homoglyph: boolean; risk_score: number; evidence: string; is_official: boolean };
+export type DashboardStats = { total_threats: number; high_risk: number; platforms: { platform: string; threats: number }[] };

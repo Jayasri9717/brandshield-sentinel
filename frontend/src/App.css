@@ -1187,6 +1187,32 @@ select.form-control {
   font-size: var(--fs-xs);
 }
 
+.inline-add-row,
+.account-add-row {
+  display: grid;
+  gap: 7px;
+  margin-top: 8px;
+}
+
+.inline-add-row {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.account-add-row {
+  grid-template-columns: minmax(90px, 0.55fr) minmax(0, 1fr) auto;
+}
+
+.inline-add-row .form-control,
+.account-add-row .form-control {
+  min-width: 0;
+}
+
+.profile-editor-message {
+  margin: 0;
+  color: #f0bc75;
+  font-size: var(--fs-xs);
+}
+
 .verified-label {
   display: inline-flex;
   align-items: center;
@@ -1252,6 +1278,104 @@ select.form-control {
   color: #a8c3f4;
   background: #1c2c43;
   border-radius: 7px;
+}
+
+.asset-image {
+  width: 100%;
+  height: 100%;
+  padding: 3px;
+  object-fit: contain;
+}
+
+.auth-shell {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--blue) 11%, transparent), transparent 48%),
+    var(--canvas);
+}
+
+.auth-card {
+  width: min(100%, 420px);
+  padding: 30px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 24px 70px rgb(0 0 0 / 25%);
+}
+
+.auth-card > .brand-mark {
+  margin-bottom: 18px;
+}
+
+.auth-back {
+  margin-bottom: 16px;
+}
+
+.auth-card h1 {
+  margin: 0;
+  color: var(--text);
+  font-size: var(--fs-2xl);
+  letter-spacing: var(--tracking-tight);
+}
+
+.auth-description {
+  margin: 8px 0 22px;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+}
+
+.auth-form {
+  display: grid;
+  gap: 15px;
+}
+
+.auth-form > div {
+  display: grid;
+  gap: 6px;
+}
+
+.auth-hint,
+.auth-footnote {
+  color: var(--subtle);
+  font-size: var(--fs-xs);
+}
+
+.auth-submit {
+  justify-content: center;
+  width: 100%;
+  min-height: 40px;
+  margin-top: 4px;
+}
+
+.auth-message {
+  margin: 0;
+  color: var(--red);
+  font-size: var(--fs-sm);
+}
+
+.auth-switch {
+  margin: 20px 0 0;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  text-align: center;
+}
+
+.auth-switch button {
+  padding: 0;
+  color: var(--blue);
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.auth-footnote {
+  margin: 20px 0 0;
+  line-height: 1.5;
+  text-align: center;
 }
 
 .upload-placeholder {
@@ -2952,6 +3076,10 @@ button:disabled {
   color: #334156;
 }
 
+:root[data-theme="light"] .profile-editor-message {
+  color: #8a5b17;
+}
+
 :root[data-theme="light"] .verified-label {
   color: #287a5c;
 }
@@ -2960,6 +3088,16 @@ button:disabled {
 :root[data-theme="light"] .asset-mark {
   color: #416ba9;
   background: #edf3fc;
+}
+
+@media (max-width: 520px) {
+  .account-add-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .account-add-row select {
+    grid-column: 1 / -1;
+  }
 }
 
 :root[data-theme="light"] .upload-placeholder {
@@ -3268,4 +3406,30 @@ button:disabled {
   .stat-card::after {
     display: none;
   }
+}
+.threat-chart-panel {
+  margin: 0 0 22px;
+}
+
+.threat-chart {
+  width: 100%;
+  min-height: 230px;
+}
+
+.chart-empty {
+  display: grid;
+  min-height: 150px;
+  place-items: center;
+  color: var(--muted);
+  text-align: center;
+}
+
+.detection-error {
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.detection-summary a,
+.action-feedback a {
+  color: var(--blue);
 }
