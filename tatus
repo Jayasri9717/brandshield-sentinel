@@ -1,0 +1,135 @@
+[1mdiff --git a/frontend/README.md b/frontend/README.md[m
+[1mindex d6af7e3..3492db2 100644[m
+[1m--- a/frontend/README.md[m
+[1m+++ b/frontend/README.md[m
+[36m@@ -1,32 +1,26 @@[m
+[31m-# React + TypeScript + Vite[m
+[32m+[m[32m# Drishti DRP frontend[m
+ [m
+[31m-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.[m
+[32m+[m[32mThe frontend is a React and TypeScript single-page application built with Vite. It currently uses the dependencies already included in this project; it does not require Tailwind CSS, Axios, or React Router.[m
+ [m
+[31m-Currently, two official plugins are available:[m
+[32m+[m[32m## Run locally[m
+ [m
+[31m-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)[m
+[31m-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)[m
+[32m+[m[32mFrom this directory:[m
+ [m
+[31m-## React Compiler[m
+[32m+[m[32m```sh[m
+[32m+[m[32mnpm install[m
+[32m+[m[32mnpm run dev[m
+[32m+[m[32m```[m
+ [m
+[31m-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).[m
+[32m+[m[32mThe Vite development server prints its local URL when it starts. To create and preview a production build, run `npm run build` and `npm run preview`.[m
+ [m
+[31m-## Expanding the Oxlint configuration[m
+[32m+[m[32m## Demo data and API status[m
+ [m
+[31m-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:[m
+[32m+[m[32mDashboard findings and the Social Monitor, App Monitor, Lookalike Domains, and Brand Profile examples are illustrative UI data. They do not represent live detections, scans, external platform integrations, or saved backend records.[m
+ [m
+[31m-```json[m
+[31m-{[m
+[31m-  "$schema": "./node_modules/oxlint/configuration_schema.json",[m
+[31m-  "plugins": ["react", "typescript", "oxc"],[m
+[31m-  "options": {[m
+[31m-    "typeAware": true[m
+[31m-  },[m
+[31m-  "rules": {[m
+[31m-    "react/rules-of-hooks": "error",[m
+[31m-    "react/only-export-components": ["warn", { "allowConstantExport": true }][m
+[31m-  }[m
+[31m-}[m
+[31m-```[m
+[32m+[m[32mThe app checks `http://127.0.0.1:8000/api/health` to display local API availability. At present, this health endpoint is the only backend route used by the frontend. Scan and discovery controls are previews and do not send requests.[m
+[32m+[m
+[32m+[m[32m## Appearance and typography[m
+[32m+[m
+[32m+[m[32mLight, Dark, and System appearance modes are available in the top bar. The selected mode is stored in browser local storage; System follows the operating-system color preference. Sidebar collapse preference is also stored locally.[m
+ [m
+[31m-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.[m
+[32m+[m[32mNo Calluna Sans or Calluna font files are included in the project. The UI requests those family names first and falls back to system sans-serif fonts for interface text and Georgia for editorial headings. For exact Calluna rendering, provide properly licensed Calluna Sans and Calluna font files and register them with `@font-face` in the frontend styles.[m
+[1mdiff --git a/frontend/index.html b/frontend/index.html[m
+[1mindex 0fca6f0..c6248b5 100644[m
+[1m--- a/frontend/index.html[m
+[1m+++ b/frontend/index.html[m
+[36m@@ -4,7 +4,27 @@[m
+     <meta charset="UTF-8" />[m
+     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />[m
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />[m
+[31m-    <title>frontend</title>[m
+[32m+[m[32m    <meta name="theme-color" content="#090e18" />[m
+[32m+[m[32m    <meta name="description" content="Drishti DRP brand protection workspace" />[m
+[32m+[m[32m    <link rel="preconnect" href="https://fonts.googleapis.com" />[m
+[32m+[m[32m    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />[m
+[32m+[m[32m    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400..700&display=swap" rel="stylesheet" />[m
+[32m+[m[32m    <script>[m
+[32m+[m[32m      (() => {[m
+[32m+[m[32m        try {[m
+[32m+[m[32m          const saved = localStorage.getItem("drishti-theme");[m
+[32m+[m[32m          const systemPrefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;[m
+[32m+[m[32m          const theme = saved === "light" || saved === "dark" ? saved : systemPrefersLight ? "light" : "dark";[m
+[32m+[m[32m          document.documentElement.dataset.theme = theme;[m
+[32m+[m[32m          document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "light" ? "#f4f6f9" : "#0d111b");[m
+[32m+[m[32m        } catch {[m
+[32m+[m[32m          const theme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";[m
+[32m+[m[32m          document.documentElement.dataset.theme = theme;[m
+[32m+[m[32m          document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "light" ? "#f4f6f9" : "#0d111b");[m
+[32m+[m[32m        }[m
+[32m+[m[32m      })();[m
+[32m+[m[32m    </script>[m
+[32m+[m[32m    <title>Drishti DRP · Brand Protection</title>[m
+   </head>[m
+   <body>[m
+     <div id="root"></div>[m
+[1mdiff --git a/frontend/src/App.css b/frontend/src/App.css[m
+[1mindex 7571674..1830260 100644[m
+[1m--- a/frontend/src/App.css[m
+[1m+++ b/frontend/src/App.css[m
+[36m@@ -1,12 +1,65 @@[m
+[31m-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");[m
+[31m-[m
+ :root {[m
+[31m-  font-family: "Inter", Arial, sans-serif;[m
+[31m-  color: #e8edf8;[m
+[31m-  background: #090e1a;[m
+[32m+[m[32m  color: var(--text, #e7ebf3);[m
+[32m+[m[32m  background: var(--canvas, #090e18);[m
+[32m+[m[32m  color-scheme: dark;[m
+   font-synthesis: none;[m
+   text-rendering: optimizeLegibility;[m
+   -webkit-font-smoothing: antialiased;[m
+[32m+[m[32m  /* Typography scale. The font family itself (--font-primary: Outfit) is declared in index.css. */[m
+[32m+[m[32m  --fs-2xs: 0.6875rem; /* 11px  captions, eyebrows, table headers */[m
+[32m+[m[32m  --fs-xs: 0.75rem; /* 12px  metadata, helper text, small controls */[m
+[32m+[m[32m  --fs-sm: 0.8125rem; /* 13px  table cells, form fields, secondary body */[m
+[32m+[m[32m  --fs-md: 0.875rem; /* 14px  body copy, navigation */[m
+[32m+[m[32m  --fs-lg: 1rem; /* 16px  card and section headings */[m
+[32m+[m[32m  --fs-xl: 1.75rem; /* 28px  dashboard metrics */[m
+[32m+[m[32m  --fs-2xl: clamp(1.75rem, 1.35rem + 1.2vw, 2.25rem); /* page titles */[m
+[32m+[m[32m  --tracking-tight: -0.02em;[m
+[32m+[m[32m  --tracking-snug: -0.01em;[m
+[32m+[m[32m  --tracking-caps: 0.09em;[m
+[32m+[m
+[32m+[m[32m  /* Layout */[m
+[32m+[m[32m  --sidebar-width: 238px;[m
+[32m+[m[32m  --sidebar-collapsed-width: 78px;[m
+[32m+[m[32m  --topbar-height: 58px;[m
+[32m+[m
+[32m+[m[32m  /* Motion system: one set of durations/easings shared by every interactive element. */[m
+[32m+[m[32m  --ease-standard: cubic-bezier(0.2, 0.7, 0.2, 1);[m
+[32m+[m[32m  --ease-emphasized: cubic-bezier(0.2, 0.8, 0.2, 1);[m
+[32m+[m[32m  --duration-fast: 160ms;[m
+[32m+[m[32m  --duration-base: 220ms;[m
+[32m+[m[32m  --duration-card: 260ms;[m
+[32m+[m[32m  --duration-layout: 260ms;[m
+[32m+[m[32m  --transition-interactive:[m
+[32m+[m[32m    color var(--duration-fast) var(--ease-standard),[m
+[32m+[m[32m    background-color var(--duration-fast) var(--ease-standard),[m
+[32m+[m[32m    border-color var(--duration-fast) var(--ease-standard),[m
+[32m+[m[32m    box-shadow var(--duration-fast) var(--ease-standard),[m
+[32m+[m[32m    opacity var(--duration-fast) var(--ease-standard),[m
+[32m+[
